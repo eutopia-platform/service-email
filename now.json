@@ -7,6 +7,9 @@
   "env": {
     "DATABASE_URL": "@database_url",
     "DATABASE_NAME": "@database_name",
-    "MAIL_DATABASE_PASSWORD": "@mail_database_password"
+    "MAIL_DATABASE_PASSWORD": "@mail_database_password",
+    "MAIL_SENDER_ADDRESS": "@mail_sender_address",
+    "MAIL_SENDER_PASSWORD": "@mail_sender_password",
+    "MAIL_SERVICE_PASSWORD": "@mail_service_password"
   }
 }

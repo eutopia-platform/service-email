@@ -2,6 +2,11 @@ type Query {
   hello: String
 }
 
+type Mutation {
+  sendEmail(sender: String, receiver: String!, subject: String!, text: String!, html: String): Boolean
+}
+
 schema {
   query: Query
+  mutation: Mutation
 }

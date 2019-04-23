@@ -7,7 +7,7 @@
     "now-build": "npm run build",
     "build:watch": "npm-watch build",
     "start": "NODE_ENV=production micro ./dist/index.js",
-    "start:dev": "NODE_ENV=development micro-dev ./dist/index.js --port 4000"
+    "start:dev": "source secret_setup.sh && NODE_ENV=development micro-dev ./dist/index.js --port 9000"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +33,7 @@
     "knex": "^0.16.5",
     "micro": "^9.3.3",
     "node-fetch": "^2.3.0",
+    "nodemailer": "^6.1.1",
     "pg": "^7.10.0"
   }
 }
