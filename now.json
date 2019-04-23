@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "alias": ["mail.api.productcube.io"],
+  "name": "service_mail",
+  "builds": [{ "src": "index.js", "use": "@now/node" }],
+  "scope": "eutopia",
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "DATABASE_NAME": "@database_name",
+    "MAIL_DATABASE_PASSWORD": "@mail_database_password"
+  }
+}

@@ -1,0 +1,12 @@
+CREATE SCHEMA IF NOT EXISTS sc_mail;
+
+DROP TABLE IF EXISTS sc_mail;
+CREATE TABLE sc_mail.email(
+
+);
+
+DROP USER IF EXISTS service_mail;
+CREATE USER service_mail WITH PASSWORD TOXqYVOVhxZj1WrH;
+
+GRANT USAGE ON SCHEMA sc_mail TO service_mail;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA sc_mail TO service_mail;
