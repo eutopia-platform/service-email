@@ -22,10 +22,7 @@ class Service {
         new HttpLink({
           uri: url,
           credentials: 'same-origin',
-          fetch,
-          headers: {
-            auth: process.env.AUTH_PASSWORD
-          }
+          fetch
         })
       ]),
       cache: new InMemoryCache()
