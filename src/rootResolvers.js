@@ -11,6 +11,18 @@ const knex = require('knex')({
   }
 })
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL_SENDER_ADDRESS,
+    pass: process.env.MAIL_SENDER_PASSWORD
+  }
+})
+
+const dbSchema = 'sc_mail'
+const select = async (cond, table) => await knex.select().withSchema(dbSchema).from(table).where(cond)
+const selectSingle = async (cond, table) => await select(cond, table) |> (_ => #.length ?#[0] : null) ()
+
 export default {
   hello: () => 'hello there!',
 
@@ -18,21 +30,31 @@ export default {
     const auth = context.headers.auth
     if (!auth || auth !== process.env.MAIL_SERVICE_PASSWORD)
       throw Error('UNAUTHORIZED')
-    
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.MAIL_SENDER_ADDRESS,
-        pass: process.env.MAIL_SENDER_PASSWORD
-      }
-    })
 
-    let info = await transporter.sendMail({
+    await transporter.sendMail({
       from: (sender ? `"${sender}" ` : '') + process.env.MAIL_SENDER_ADDRESS,
       to: receiver,
       subject: subject,
       text: text,
       ...html && { html }
+    })
+  },
+
+  subscribeNews: async({email}) => {
+    if (await selectSingle({email}, 'news'))
+      throw Error('ALREADY_SUBSCRIBED')
+    await knex.withSchema(dbSchema).into('news').insert({email})
+
+    await transporter.sendMail({
+      from: process.env.MAIL_SENDER_ADDRESS,
+      to: email,
+      subject: 'Welcome to Productcube 🚀',
+      text: `Hello,
+Thanks for signing up to the Productcube newsletter!
+
+If you haven't yet created an account, you can do so at https://productcube.io/onboarding/
+
+See you soon!`,
     })
   }
 }
