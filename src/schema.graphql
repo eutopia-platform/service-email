@@ -4,6 +4,7 @@ type Query {
 
 type Mutation {
   sendEmail(sender: String, receiver: String!, subject: String!, text: String!, html: String): Boolean
+  subscribeNews(email: String!): Boolean
 }
 
 schema {
