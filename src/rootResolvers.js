@@ -55,6 +55,10 @@ Thanks for signing up to the Productcube newsletter!
 If you haven't yet created an account, you can do so at https://productcube.io/onboarding/
 
 See you soon!`,
+      html: `<p>Hello,<br>
+Thanks for signing up to the Productcube newsletter!<br>
+If you haven't yet created an account, you can do so <a href="https://productcube.io/onboarding/">here</a>.<br>
+See you soon!</p>`
     })
   }
 }
