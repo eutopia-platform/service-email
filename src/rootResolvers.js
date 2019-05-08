@@ -41,6 +41,10 @@ export default {
   },
 
   subscribeNews: async({email}) => {
+    if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        .test(String(email).toLowerCase()))
+        throw Error('INVALID_EMAIL')
+    
     if (await selectSingle({email}, 'news'))
       throw Error('ALREADY_SUBSCRIBED')
     await knex.withSchema(dbSchema).into('news').insert({email})
